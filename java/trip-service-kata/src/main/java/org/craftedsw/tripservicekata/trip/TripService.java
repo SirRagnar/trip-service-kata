@@ -29,7 +29,7 @@ public class TripService {
 		}
 	}
 
-	private User getLoggedUser() {
+	public User getLoggedUser() {
 		return UserSession.getInstance().getLoggedUser();
 	}
 
