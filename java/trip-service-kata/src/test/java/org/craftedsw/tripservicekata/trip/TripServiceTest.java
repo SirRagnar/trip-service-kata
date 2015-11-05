@@ -2,6 +2,7 @@ package org.craftedsw.tripservicekata.trip;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -31,6 +32,14 @@ public class TripServiceTest {
 		List<Trip> trips = tripService.getTripsByUser(otherUser);
 		assertNotNull(trips);
 		assertEquals(0,trips.size());
+	}
+	
+	@Test
+	public void if_user_has_no_friends_findTripsByUser_is_not_called(){
+		when(tripService.getLoggedUser()).thenReturn(loggedUser);
+		User otherUser = new User();
+		tripService.getTripsByUser(otherUser);
+		verify(tripService, Mockito.times(0)).findTripsByUser(otherUser);
 	}
 
 }
