@@ -1,9 +1,10 @@
 package org.craftedsw.tripservicekata.user;
 
 public class SessionFactory {
-
-	public UserSession getUserSession() {
-		return UserSession.getInstance();
+	private static final UserSession userSession = new UserSession();
+	
+	public static UserSession getUserSession() {
+		return userSession;
 	}
 
 }
