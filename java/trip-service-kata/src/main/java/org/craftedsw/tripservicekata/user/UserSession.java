@@ -3,13 +3,15 @@ package org.craftedsw.tripservicekata.user;
 import org.craftedsw.tripservicekata.exception.CollaboratorCallException;
 
 public class UserSession {
-		
+	
+	private static final SessionFactory sessionFactory = new SessionFactory();
+	
 	protected UserSession() {
 		
 	}
 	
 	public static UserSession getInstance() {
-		return SessionFactory.getUserSession();
+		return sessionFactory.getUserSession();
 	}
 
 	public User getLoggedUser() {
