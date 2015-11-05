@@ -17,4 +17,11 @@ public class UserSessionTest {
 		assertNotNull(UserSession.getInstance());
 	}
 
+	@Test
+	public void two_different_calls_to_getInstance_returns_the_same_instance() {
+		UserSession userSessionA = UserSession.getInstance();
+		UserSession userSessionB = UserSession.getInstance();
+
+		assertEquals(userSessionA, userSessionB);
+	}
 }
