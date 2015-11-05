@@ -10,6 +10,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.craftedsw.tripservicekata.user.User;
@@ -22,12 +23,12 @@ public class TripServiceTest {
 	@Before
 	public void setUp() {
 		tripService = mock(TripService.class);
+		when(tripService.getLoggedUser()).thenReturn(loggedUser);
 		loggedUser = new User();
 	}
 
 	@Test
 	public void user_with_no_friends_has_no_trips() {
-		when(tripService.getLoggedUser()).thenReturn(loggedUser);
 		User otherUser = new User();
 		List<Trip> trips = tripService.getTripsByUser(otherUser);
 		assertNotNull(trips);
@@ -36,10 +37,27 @@ public class TripServiceTest {
 	
 	@Test
 	public void if_user_has_no_friends_findTripsByUser_is_not_called(){
-		when(tripService.getLoggedUser()).thenReturn(loggedUser);
 		User otherUser = new User();
 		tripService.getTripsByUser(otherUser);
 		verify(tripService, Mockito.times(0)).findTripsByUser(otherUser);
+	}
+	
+	@Test
+	public void user_with_logged_user_in_her_friend_has_trips(){
+		User coolKid = new User();
+		coolKid.addFriend(new User());
+		coolKid.addFriend(new User());
+		coolKid.addFriend(loggedUser);
+		
+		List<Trip> tripsToFound = new ArrayList<Trip>();	
+		tripsToFound.add(new Trip());
+		tripsToFound.add(new Trip());
+		tripsToFound.add(new Trip());
+		
+		when(tripService.findTripsByUser(coolKid)).thenReturn(tripsToFound);
+		
+		List<Trip> tripsFound = tripService.findTripsByUser(coolKid);
+		assertEquals(tripsToFound,tripsFound);		
 	}
 
 }
