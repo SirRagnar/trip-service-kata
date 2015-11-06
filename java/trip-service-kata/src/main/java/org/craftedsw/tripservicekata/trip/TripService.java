@@ -39,8 +39,11 @@ public class TripService {
 		}
 	}
 
+	/**
+	 * @deprecated Use {@link org.craftedsw.tripservicekata.trip.TripDAOWrapper#findTripsByUser(User)} instead
+	 */
 	public List<Trip> findTripsByUser(User user) {
-		return TripDAO.findTripsByUser(user);
+		return tripDaoWrapper.findTripsByUser(user);
 	}
 
 	public User getLoggedUser() {
