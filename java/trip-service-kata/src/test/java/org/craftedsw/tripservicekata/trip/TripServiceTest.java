@@ -14,17 +14,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.craftedsw.tripservicekata.user.User;
+import org.craftedsw.tripservicekata.user.UserSessionWrapper;
 
 public class TripServiceTest {
 	private TripService tripService;
+	private TripDAOWrapper tripDAOWrapper;
+	private UserSessionWrapper userSessionWrapper;
 
 	private User loggedUser;
 
 	@Before
-	public void setUp() {
-		tripService = mock(TripService.class);
-		when(tripService.getLoggedUser()).thenReturn(loggedUser);
+	public void setUp() {	
 		loggedUser = new User();
+		tripDAOWrapper = mock(TripDAOWrapper.class);
+		userSessionWrapper = mock(UserSessionWrapper.class);
+		
+		tripService = new TripService(tripDAOWrapper,userSessionWrapper);
+		when(userSessionWrapper.getLoggedUser()).thenReturn(loggedUser);
+		
+		
 	}
 
 	@Test
@@ -39,7 +47,7 @@ public class TripServiceTest {
 	public void if_user_has_no_friends_findTripsByUser_is_not_called(){
 		User otherUser = new User();
 		tripService.getTripsByUser(otherUser);
-		verify(tripService, Mockito.times(0)).findTripsByUser(otherUser);
+		verify(tripDAOWrapper, Mockito.times(0)).findTripsByUser(otherUser);
 	}
 	
 	@Test
@@ -54,9 +62,9 @@ public class TripServiceTest {
 		tripsToFound.add(new Trip());
 		tripsToFound.add(new Trip());
 		
-		when(tripService.findTripsByUser(coolKid)).thenReturn(tripsToFound);
+		when(tripDAOWrapper.findTripsByUser(coolKid)).thenReturn(tripsToFound);
 		
-		List<Trip> tripsFound = tripService.findTripsByUser(coolKid);
+		List<Trip> tripsFound = tripDAOWrapper.findTripsByUser(coolKid);
 		assertEquals(tripsToFound,tripsFound);		
 	}
 
