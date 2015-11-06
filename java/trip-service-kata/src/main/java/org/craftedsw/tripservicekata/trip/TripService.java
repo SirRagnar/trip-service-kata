@@ -8,9 +8,9 @@ import org.craftedsw.tripservicekata.user.User;
 import org.craftedsw.tripservicekata.user.UserSessionWrapper;
 
 public class TripService {
-	
+
 	private TripDAOWrapper tripDAOWrapper;
-	
+
 	private UserSessionWrapper userSessionWrapper;
 
 	public TripService(TripDAOWrapper tripDaoWrapper, UserSessionWrapper userSessionWrapper) {
@@ -36,20 +36,6 @@ public class TripService {
 		} else {
 			throw new UserNotLoggedInException();
 		}
-	}
-
-	/**
-	 * @deprecated Use {@link org.craftedsw.tripservicekata.trip.TripDAOWrapper#findTripsByUser(User)} instead
-	 */
-	public List<Trip> findTripsByUser(User user) {
-		return tripDAOWrapper.findTripsByUser(user);
-	}
-
-	/**
-	 * @deprecated Use {@link org.craftedsw.tripservicekata.user.UserSessionWrapper#getLoggedUser()} instead
-	 */
-	public User getLoggedUser() {
-		return userSessionWrapper.getLoggedUser();
 	}
 
 }
