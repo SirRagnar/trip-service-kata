@@ -6,8 +6,13 @@ import java.util.List;
 import org.craftedsw.tripservicekata.exception.UserNotLoggedInException;
 import org.craftedsw.tripservicekata.user.User;
 import org.craftedsw.tripservicekata.user.UserSession;
+import org.craftedsw.tripservicekata.user.UserSessionWrapper;
 
 public class TripService {
+	
+	private TripDAOWrapper tripDaoWrapper;
+	
+	private UserSessionWrapper userSessionWrapper;
 
 	public List<Trip> getTripsByUser(User user) throws UserNotLoggedInException {
 		List<Trip> tripList = new ArrayList<Trip>();
