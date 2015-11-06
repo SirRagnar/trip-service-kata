@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.craftedsw.tripservicekata.exception.UserNotLoggedInException;
 import org.craftedsw.tripservicekata.user.User;
-import org.craftedsw.tripservicekata.user.UserSession;
 import org.craftedsw.tripservicekata.user.UserSessionWrapper;
 
 public class TripService {
@@ -46,8 +45,11 @@ public class TripService {
 		return tripDaoWrapper.findTripsByUser(user);
 	}
 
+	/**
+	 * @deprecated Use {@link org.craftedsw.tripservicekata.user.UserSessionWrapper#getLoggedUser()} instead
+	 */
 	public User getLoggedUser() {
-		return UserSession.getInstance().getLoggedUser();
+		return userSessionWrapper.getLoggedUser();
 	}
 
 }
