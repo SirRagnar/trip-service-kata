@@ -8,7 +8,9 @@ import org.craftedsw.tripservicekata.user.User;
 import org.craftedsw.tripservicekata.user.UserSession;
 
 public class TripService {
-
+	
+	private TripDAOWrapper tripDAOWrapper = new TripDAOWrapper();
+	
 	public List<Trip> getTripsByUser(User user) throws UserNotLoggedInException {
 		List<Trip> tripList = new ArrayList<Trip>();
 		User loggedUser = getLoggedUser();
