@@ -9,12 +9,12 @@ import org.craftedsw.tripservicekata.user.UserSessionWrapper;
 
 public class TripService {
 	
-	private TripDAOWrapper tripDaoWrapper;
+	private TripDAOWrapper tripDAOWrapper;
 	
 	private UserSessionWrapper userSessionWrapper;
 
 	public TripService(TripDAOWrapper tripDaoWrapper, UserSessionWrapper userSessionWrapper) {
-		this.tripDaoWrapper = tripDaoWrapper;
+		this.tripDAOWrapper = tripDaoWrapper;
 		this.userSessionWrapper = userSessionWrapper;
 	}
 
@@ -42,7 +42,7 @@ public class TripService {
 	 * @deprecated Use {@link org.craftedsw.tripservicekata.trip.TripDAOWrapper#findTripsByUser(User)} instead
 	 */
 	public List<Trip> findTripsByUser(User user) {
-		return tripDaoWrapper.findTripsByUser(user);
+		return tripDAOWrapper.findTripsByUser(user);
 	}
 
 	/**
