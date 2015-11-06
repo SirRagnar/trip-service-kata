@@ -39,7 +39,7 @@ public class TripServiceTest {
 	public void if_user_has_no_friends_findTripsByUser_is_not_called(){
 		User otherUser = new User();
 		tripService.getTripsByUser(otherUser);
-		verify(tripService, Mockito.times(0)).findTripsByUser(otherUser);
+		verify(tripService, Mockito.times(0)).tripDAOWrapper.findTripsByUser(otherUser);
 	}
 	
 	@Test
@@ -54,9 +54,9 @@ public class TripServiceTest {
 		tripsToFound.add(new Trip());
 		tripsToFound.add(new Trip());
 		
-		when(tripService.findTripsByUser(coolKid)).thenReturn(tripsToFound);
+		when(tripService.tripDAOWrapper.findTripsByUser(coolKid)).thenReturn(tripsToFound);
 		
-		List<Trip> tripsFound = tripService.findTripsByUser(coolKid);
+		List<Trip> tripsFound = tripService.tripDAOWrapper.findTripsByUser(coolKid);
 		assertEquals(tripsToFound,tripsFound);		
 	}
 
