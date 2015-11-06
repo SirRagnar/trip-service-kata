@@ -14,6 +14,11 @@ public class TripService {
 	
 	private UserSessionWrapper userSessionWrapper;
 
+	public TripService(TripDAOWrapper tripDaoWrapper, UserSessionWrapper userSessionWrapper) {
+		this.tripDaoWrapper = tripDaoWrapper;
+		this.userSessionWrapper = userSessionWrapper;
+	}
+
 	public List<Trip> getTripsByUser(User user) throws UserNotLoggedInException {
 		List<Trip> tripList = new ArrayList<Trip>();
 		User loggedUser = getLoggedUser();
